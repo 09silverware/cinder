@@ -36,7 +36,7 @@ var _Creature = function( type, map, x, y ) {
 		var go = self.map.IsCellWalkable(self.x+dx,self.y+dy);
 		if(!go&&teleport) {
 			console.log("SQUELCH!");
-			self.Damage(PDis({x:0,y:0},{x:dx,y:dy}));
+			self.Damage(Math.ceil( PDis({x:0,y:0},{x:dx,y:dy}) ));
 		}
 		else if(!go) {
 			var gox = self.map.IsCellWalkable(self.x+dx,self.y);

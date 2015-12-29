@@ -23,112 +23,47 @@ function Init(init) {
 	}
 
 	else if(init==2) {
-		_TileTypes.stoneWall = new _SmartTileType( 'Stone Wall', false, false, true, _Selectors.OnlyWalls, {
-			n:_sprites['stoneWall_n'],
-			e:_sprites['stoneWall_e'],
-			s:_sprites['stoneWall_s'],
-			w:_sprites['stoneWall_w'],
-			ne:_sprites['stoneWall_ne'],
-			nw:_sprites['stoneWall_nw'],
-			ns:_sprites['stoneWall_ns'],
-			ew:_sprites['stoneWall_ew'],
-			es:_sprites['stoneWall_es'],
-			ws:_sprites['stoneWall_ws'],
-			new:_sprites['stoneWall_new'],
-			nes:_sprites['stoneWall_nes'],
-			nws:_sprites['stoneWall_nws'],
-			ews:_sprites['stoneWall_ews'],
-			news:_sprites['stoneWall_news'],
-			z:_sprites['stoneWall_z'],
-
-			m_n:_sprites['wall_n_know'],
-			m_e:_sprites['wall_e_know'],
-			m_s:_sprites['wall_s_know'],
-			m_w:_sprites['wall_w_know'],
-			m_ne:_sprites['wall_ne_know'],
-			m_nw:_sprites['wall_nw_know'],
-			m_ns:_sprites['wall_ns_know'],
-			m_ew:_sprites['wall_ew_know'],
-			m_es:_sprites['wall_es_know'],
-			m_ws:_sprites['wall_ws_know'],
-			m_new:_sprites['wall_new_know'],
-			m_nes:_sprites['wall_nes_know'],
-			m_nws:_sprites['wall_nws_know'],
-			m_ews:_sprites['wall_ews_know'],
-			m_news:_sprites['wall_news_know'],
-			m_z:_sprites['wall_z_know']
-		} );
-
-		_TileTypes.stoneFloor = new _SmartTileType( 'Stone Floor', true, true, false, _Selectors.Exclusive, {
-			n:_sprites['stoneFloor_n'],
-			e:_sprites['stoneFloor_e'],
-			s:_sprites['stoneFloor_s'],
-			w:_sprites['stoneFloor_w'],
-			ne:_sprites['stoneFloor_ne'],
-			nw:_sprites['stoneFloor_nw'],
-			ns:_sprites['stoneFloor_ns'],
-			ew:_sprites['stoneFloor_ew'],
-			es:_sprites['stoneFloor_es'],
-			ws:_sprites['stoneFloor_ws'],
-			new:_sprites['stoneFloor_new'],
-			nes:_sprites['stoneFloor_nes'],
-			nws:_sprites['stoneFloor_nws'],
-			ews:_sprites['stoneFloor_ews'],
-			news:_sprites['stoneFloor_news'],
-			z:_sprites['stoneFloor_z'],
-
-			m_n:_sprites['m_stoneFloor_n'],
-			m_e:_sprites['m_stoneFloor_e'],
-			m_s:_sprites['m_stoneFloor_s'],
-			m_w:_sprites['m_stoneFloor_w'],
-			m_ne:_sprites['m_stoneFloor_ne'],
-			m_nw:_sprites['m_stoneFloor_nw'],
-			m_ns:_sprites['m_stoneFloor_ns'],
-			m_ew:_sprites['m_stoneFloor_ew'],
-			m_es:_sprites['m_stoneFloor_es'],
-			m_ws:_sprites['m_stoneFloor_ws'],
-			m_new:_sprites['m_stoneFloor_new'],
-			m_nes:_sprites['m_stoneFloor_nes'],
-			m_nws:_sprites['m_stoneFloor_nws'],
-			m_ews:_sprites['m_stoneFloor_ews'],
-			m_news:_sprites['m_stoneFloor_news'],
-			m_z:_sprites['m_stoneFloor_z'],
-		} );
-		_TileTypes.stoneFloorSingle = new _TileType('Stone Floor', true, true, false,{
-			tex:_sprites['stoneFloor_news'],
-			m_tex:_sprites['m_stoneFloor_news']
-		});
-
-		_nullSpr = _sprites['null'];
+		DefineTiles();
 
 		_CreatureTypes.testWizard = new _CreatureType( '!!Wizard!!', _sprites['wizard'], 20 );
 
 		_Maps.test = new _Map("Test Map");
 		var sh = new _Shape();
-		var wall = sh.AddStyle(_TileTypes.stoneWall);
-		var floor = sh.AddStyle(_TileTypes.stoneFloor);
-		var nx,ny;
-		var RN = r = Math.random;
-		var max = 10; var min = 2;
-		for(var xx=0; xx<12; xx++) {
-			for(var yy=0; yy<12; yy++) {
-				var w = Math.ceil(RN()*(max-min-2)) + min;
-				var h = Math.ceil(RN()*(max-min-2)) + min;
-				var x = xx*(max+4)-Math.floor(w/2);
-				var y = yy*(max+4)-Math.floor(h/2);
-				if(!nx&&!ny){ nx = x+Math.floor(w/2); ny = y+Math.floor(h/2); }
-				sh.Rectangle(x,y,w,h,floor,true,1,wall,false);
-				sh.Rectangle(x+Math.floor(w/2),y+Math.floor(h/2),1,(max+4),floor,true,1,wall,false);
-				sh.Rectangle(x+Math.floor(w/2),y+Math.floor(h/2),(max+4),1,floor,true,1,wall,false);
-			}
-		}
+		var swall = sh.AddStyle(_TileTypes.stoneWall);
+		var rwall = sh.AddStyle(_TileTypes.rockWall);
+		var sfloor = sh.AddStyle(_TileTypes.stoneFloor);
+		var dfloor = sh.AddStyle(_TileTypes.dirtFloor);
+		var rfloor = sh.AddStyle(_TileTypes.rockFloor);
+		var nx=12,ny=12;
+		// var RN = r = Math.random;
+		// var max = 10; var min = 2;
+		// for(var xx=0; xx<12; xx++) {
+		// 	for(var yy=0; yy<12; yy++) {
+		// 		var w = Math.ceil(RN()*(max-min-2)) + min;
+		// 		var h = Math.ceil(RN()*(max-min-2)) + min;
+		// 		var x = xx*(max+4)-Math.floor(w/2);
+		// 		var y = yy*(max+4)-Math.floor(h/2);
+		// 		if(!nx&&!ny){ nx = x+Math.floor(w/2); ny = y+Math.floor(h/2); }
+		// 		sh.Rectangle(x,y,w,h,sfloor,true,1,swall,false);
+		// 		sh.Rectangle(x+Math.floor(w/2),y+Math.floor(h/2),1,(max+4),dfloor,true,1,rwall,false);
+		// 		sh.Rectangle(x+Math.floor(w/2),y+Math.floor(h/2),(max+4),1,rfloor,true,1,rwall,false);
+		// 	}
+		// }
+
+		var ca = CellulaAutomata( 6, 100, 100, 0.5, 2, 8, 4 );
+		var ff = FloodFill( ca, 100, 100 );
+		sh.Rooms( 0, 0, ff, dfloor, true, 1, rwall, false );
 
 		_Maps.test.CarveShape(sh);
 		_currMap = _Maps.test;
 
 		_Player = new _Creature(_CreatureTypes.testWizard, _currMap, nx, ny );
-		_currMap.CellFOV(_Player.x,_Player.y,_configuration.viewDis)
+		_currMap.CellFOV(_Player.x,_Player.y,_configuration.viewDis);
 
+		Init(3);
+	}
+
+	else if(init==3) {
 		keyCapture();
 		Loop();
 	}

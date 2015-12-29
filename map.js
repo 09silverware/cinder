@@ -479,15 +479,19 @@ _Selectors.OnlyWalls = function( map, tile ) {
 	// returns "news" values or "z"
 	out = '';
 
-	var n = map.GetCell(tile.x,tile.y-1);
-	var e = map.GetCell(tile.x+1,tile.y);
-	var w = map.GetCell(tile.x-1,tile.y);
-	var s = map.GetCell(tile.x,tile.y+1);
+	var n = map.GetCell(tile.x,tile.y-1); n = n?n.type.isWall:false;
+	var e = map.GetCell(tile.x+1,tile.y); e = e?e.type.isWall:false;
+	var w = map.GetCell(tile.x-1,tile.y); w = w?w.type.isWall:false;
+	var s = map.GetCell(tile.x,tile.y+1); s = s?s.type.isWall:false;
+	var ne = map.GetCell(tile.x+1,tile.y-1); ne = ne?ne.type.isWall:false;
+	var nw = map.GetCell(tile.x-1,tile.y-1); nw = nw?nw.type.isWall:false;
+	var se = map.GetCell(tile.x+1,tile.y+1); se = se?se.type.isWall:false;
+	var sw = map.GetCell(tile.x-1,tile.y+1); sw = sw?sw.type.isWall:false;
 
-	out += n && n.type.isWall? 'n':'' ;
-	out += e && e.type.isWall? 'e':'' ;
-	out += w && w.type.isWall? 'w':'' ;
-	out += s && s.type.isWall? 's':'' ;
+	out += n && !(ne && nw && e && w) ? 'n':'' ;
+	out += e && !(ne && se && n && s) ? 'e':'' ;
+	out += w && !(nw && sw && n && s) ? 'w':'' ;
+	out += s && !(se && sw && e && w) ? 's':'' ;
 
 	if(out==''){ out='z'; }
 
