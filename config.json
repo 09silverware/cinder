@@ -1,0 +1,22 @@
+{
+	"width": 800,
+	"height": 600,
+
+	"noViewDis": 50,
+	"viewDis": 10,
+
+	"Images": {
+		"player0":{
+			"image":"dawnlike/Characters/Player0.png",
+			"config":"player0.json"
+		},
+		"floor":{
+			"image":"images/floor_n.png",
+			"config":"floor.json"
+		},
+		"wall":{
+			"image":"images/wall_n.png",
+			"config":"wall.json"
+		}
+	}
+}
