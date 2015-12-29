@@ -21,7 +21,7 @@ var _Creature = function( type, map, x, y ) {
 	self.y = y;
 
 	Object.defineProperty(self,'visible',{
-		get: function(){ this.map.IsCellVisible(this.x,this.y); }
+		get: function(){ return this.map.IsCellVisible(this.x,this.y); }
 		// TODO: Fix undefined error
 	});
 
